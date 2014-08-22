@@ -74,7 +74,7 @@ class Menu
 
   def display
     puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-    puts "Creating a Random Matrix of 10 x 10"
+    puts "Creating a Random Matrix of n x N"
     puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   end
 

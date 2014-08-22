@@ -39,7 +39,7 @@ class Matrix
     @rows = self.validate_size(rows, 30)
     @columns = self.validate_size(columns, 100)
     @matrix_data = [] # Initialize just to know we will use this variable
-    # binding.pry
+    @updated_matrix_data = [] # Initialize updated matrix to display new iterations iterations
   end
 
   def validate_size(size_param, max_value)
@@ -61,9 +61,9 @@ class Matrix
   end
 
   def count_surrounding_living_cells
-    puts ''
-    puts 'Results Results Results Results Results Results '
+    @updated_matrix_data = [] # Initialize updated matrix to display new iterations iterations
     (0..@rows-1).each do |row_number|
+      new_row = []  
       (0..@columns-1).each do |column_number|
         surrounding_living_cells = 0
         # Iterating through each cell, so now we have to check the surrounding ones
@@ -91,10 +91,41 @@ class Matrix
             surrounding_living_cells += 1 
           end
         end
-        print surrounding_living_cells
+        # This is the count of the living cells stored in the same tested cell
+        new_row << surrounding_living_cells 
+        # print surrounding_living_cells
       end
+      @updated_matrix_data << new_row # Once the new row is completed added to the updated_matrix_data
       puts ""
     end
+  end
+
+  #     Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+  #     Any live cell with two or three live neighbours lives on to the next generation.
+  #     Any live cell with more than three live neighbours dies, as if by overcrowding.
+  #     Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+  def apply_rules_of_life_to_updated_matrix_data
+    # binding.pry
+    old_matrix = @matrix_data.clone
+    @updated_matrix_data.each_with_index do |row, row_number|
+      row.each_with_index.each_with_index do |surrounding_living_cells_count, column_number|
+        if @matrix_data[row_number][column_number] == 'O' # A live cell
+          case @updated_matrix_data[row_number][column_number]
+            when 0..1
+              @matrix_data[row_number][column_number] = ' ' # Dies of under population
+            when 2..3 
+              @matrix_data[row_number][column_number] = 'O' # Lives on to the next generation
+            else
+              @matrix_data[row_number][column_number] = ' ' # Dies of over population
+          end
+        else # A dead cell
+          # if surrounded by 3 living cells becomes alive by reproduction
+          @matrix_data[row_number][column_number] = 'O' if @updated_matrix_data[row_number][column_number] == 3
+        end
+      end
+    end
+    
+    # binding.pry
   end
 
   def index_out_of_bounds?(position, upper_bound)
@@ -170,11 +201,21 @@ loop do
   the_menu.display
 
   dimensions = the_menu.get_dimensions
+  
   my_matrix = Matrix.new(dimensions.first, dimensions.last)
   my_matrix.fill_with_data
-  my_matrix.display
-  my_matrix.count_surrounding_living_cells
-  my_matrix.test_current_cells
+  (0..9).each do 
+    the_menu.clear_screen
+    sleep(0.1)
+    the_menu.display
+
+    my_matrix.display
+    # binding.pry
+    my_matrix.count_surrounding_living_cells
+    my_matrix.apply_rules_of_life_to_updated_matrix_data
+    sleep(0.2)
+  end
+  # my_matrix.test_current_cells
   loop do
     retry_answer = the_menu.prompt
     if retry_answer == 'y'

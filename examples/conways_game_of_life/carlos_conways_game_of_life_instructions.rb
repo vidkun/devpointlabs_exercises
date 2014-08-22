@@ -28,6 +28,11 @@ require 'pry-debugger'
 class Matrix 
 
   VALUES = ['O', ' ']
+  POSITIONS_TO_TEST = [
+    [-1,-1], [-1, 0], [-1, 1], # Top Row
+    [ 0,-1], [ 0, 0], [ 0, 1], # Middle Row
+    [ 1,-1], [ 1, 0], [ 1, 1]  # Bottom Row
+  ]
 
   def initialize(rows, columns)
 
@@ -55,6 +60,47 @@ class Matrix
     end
   end
 
+  def count_surrounding_living_cells
+    puts ''
+    puts 'Results Results Results Results Results Results '
+    (0..@rows-1).each do |row_number|
+      (0..@columns-1).each do |column_number|
+        surrounding_living_cells = 0
+        # Iterating through each cell, so now we have to check the surrounding ones
+        for adjecent_position in POSITIONS_TO_TEST
+          # binding.pry
+          # Get the row coordinate adjacent to the cell we are testing
+          row_to_test = row_number + adjecent_position.first 
+          # Get the column coordinate adjacent to the cell we are testing
+          column_to_test = column_number + adjecent_position.last
+
+          # If the row is out of bounds, then there is nothing to test
+          next if self.index_out_of_bounds?(row_to_test, @rows-1)
+          # If the column is out of bounds, then there is nothing to test
+          next if self.index_out_of_bounds?(column_to_test, @columns-1)
+          # We need to check adjacent cells only so it needs to be skipped
+          next if adjecent_position.first == 0 && adjecent_position.last == 0 ||
+                  row_number == row_to_test && column_number == column_to_test
+
+          # binding.pry
+          # This is the adjacent cell's coordinates row_to_test, column_to_test
+          # Test if the adjacent cell is alive and if so, add to the count of
+          # surrounding cells that are alive
+          if self.is_cell_alive?(row_to_test, column_to_test)
+            # binding.pry
+            surrounding_living_cells += 1 
+          end
+        end
+        print surrounding_living_cells
+      end
+      puts ""
+    end
+  end
+
+  def index_out_of_bounds?(position, upper_bound)
+    return (position < 0 || position > upper_bound)
+  end
+
   def test_current_cells
     puts ''
     puts "TEST TEST TEST TEST TEST TEST TEST"
@@ -68,6 +114,7 @@ class Matrix
   end
 
   def fill_with_data
+    srand(333)
     @matrix_data = []
     (1..@rows).each do |row_number|
       new_row = []
@@ -96,7 +143,7 @@ class Menu
 
   def display
     puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-    puts "Creating a Random Matrix of 10 x 10"
+    puts "Creating a Random Matrix of n x N"
     puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   end
 
@@ -126,6 +173,7 @@ loop do
   my_matrix = Matrix.new(dimensions.first, dimensions.last)
   my_matrix.fill_with_data
   my_matrix.display
+  my_matrix.count_surrounding_living_cells
   my_matrix.test_current_cells
   loop do
     retry_answer = the_menu.prompt

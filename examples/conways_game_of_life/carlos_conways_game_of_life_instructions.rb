@@ -145,7 +145,7 @@ class Matrix
   end
 
   def fill_with_data
-    srand(333)
+    # srand(333)
     @matrix_data = []
     (1..@rows).each do |row_number|
       new_row = []
@@ -186,6 +186,11 @@ class Menu
     return [rows, columns]
   end
 
+  def get_iterations
+    print 'Please enter the number of iterations: '
+    rows = gets.chomp.to_i
+  end
+
   def prompt
     puts 'Would you like another one?'
     print '(y/n) :'
@@ -204,7 +209,8 @@ loop do
   
   my_matrix = Matrix.new(dimensions.first, dimensions.last)
   my_matrix.fill_with_data
-  (0..9).each do 
+  iterations = the_menu.get_iterations
+  (0..iterations-1).each do 
     the_menu.clear_screen
     sleep(0.1)
     the_menu.display
@@ -213,7 +219,7 @@ loop do
     # binding.pry
     my_matrix.count_surrounding_living_cells
     my_matrix.apply_rules_of_life_to_updated_matrix_data
-    sleep(0.2)
+    sleep(0.1)
   end
   # my_matrix.test_current_cells
   loop do

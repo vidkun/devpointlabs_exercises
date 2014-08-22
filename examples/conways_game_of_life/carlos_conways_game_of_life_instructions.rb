@@ -23,12 +23,27 @@
 # Extra 03. Let user decide what percentage of board to fill with 'O' at the beggining.
 # Extra 04. Move classes to files of their own
 
+require 'pry-debugger'
+
 class Matrix 
 
-  def initialize
-    @rows = 10
-    @columns = 10
+  VALUES = ['O', ' ']
+  def initialize(rows, columns)
+
+    @rows = self.validate_size(rows, 30)
+    @columns = self.validate_size(columns, 100)
     @matrix_data = [] # Initialize just to know we will use this variable
+    # binding.pry
+  end
+
+  def validate_size(size_param, max_value)
+    if size_param > max_value
+      max_value
+    elsif size_param < 10
+      10
+    else 
+      size_param
+    end
   end
 
   def fill_with_data
@@ -36,7 +51,7 @@ class Matrix
     (1..@rows).each do |row_number|
       new_row = []
       (1..@columns).each do |column_number|
-        new_row << rand(9) # Random of 0 through 9
+        new_row << VALUES[rand(2)] # Random of 0 or 1
       end
       @matrix_data << new_row
     end
@@ -65,6 +80,14 @@ class Menu
     puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   end
 
+  def get_dimensions
+    print 'Please enter the number of rows: '
+    rows = gets.chomp.to_i
+    print 'Please enter the number of columns: '
+    columns = gets.chomp.to_i
+    return [rows, columns]
+  end
+
   def prompt
     puts 'Would you like another one?'
     print '(y/n) :'
@@ -73,14 +96,14 @@ class Menu
   end
 end 
 
-
-my_matrix = Matrix.new
 the_menu = Menu.new
 loop do
   the_menu.clear_screen
   sleep(0.1)
   the_menu.display
 
+  dimensions = the_menu.get_dimensions
+  my_matrix = Matrix.new(dimensions.first, dimensions.last)
   my_matrix.fill_with_data
   my_matrix.display
   loop do

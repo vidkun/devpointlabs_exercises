@@ -26,20 +26,16 @@
 class Matrix 
 
   def initialize
-    # @rows = 20
-    # @columns = 20
-    @matrix_data = [
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0],
-      [1,2,3,4,5,6,7,8,9,0]
-    ]
+    @rows = 10
+    @columns = 10
+    @matrix_data = [] # Initialize just to know we will use this variable
+    (1..@rows).each do |row_number|
+      new_row = []
+      (1..@columns).each do |column_number|
+        new_row << rand(9) # Random of 0 through 9
+      end
+      @matrix_data << new_row
+    end
   end
 
   def display

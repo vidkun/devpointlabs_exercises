@@ -28,6 +28,7 @@ require 'pry-debugger'
 class Matrix 
 
   VALUES = ['O', ' ']
+
   def initialize(rows, columns)
 
     @rows = self.validate_size(rows, 30)
@@ -46,6 +47,26 @@ class Matrix
     end
   end
 
+  def is_cell_alive?(x,y)
+    if @matrix_data[x] && @matrix_data[x][y]
+      @matrix_data[x][y] == 'O' ? true : false 
+    else
+      false
+    end
+  end
+
+  def test_current_cells
+    puts ''
+    puts "TEST TEST TEST TEST TEST TEST TEST"
+    (0..@rows-1).each do |row_number|
+      (0..@columns-1).each do |column_number|
+        print self.is_cell_alive?(row_number,column_number) ? 'T' : 'F'
+      end
+      puts ''
+    end
+    puts ''
+  end
+
   def fill_with_data
     @matrix_data = []
     (1..@rows).each do |row_number|
@@ -58,7 +79,6 @@ class Matrix
   end
 
   def display
-    # puts @matrix_data # Displays everything split by new lines
     @matrix_data.each do |row| 
       row.each do |column|
         print column
@@ -106,6 +126,7 @@ loop do
   my_matrix = Matrix.new(dimensions.first, dimensions.last)
   my_matrix.fill_with_data
   my_matrix.display
+  my_matrix.test_current_cells
   loop do
     retry_answer = the_menu.prompt
     if retry_answer == 'y'

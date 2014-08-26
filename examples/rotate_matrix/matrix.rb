@@ -55,30 +55,3 @@ rectangle = [
 
 rectangle.each {|r| puts r.inspect }
 solution = Matrix.rotate(rectangle)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

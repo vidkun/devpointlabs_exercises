@@ -14,6 +14,7 @@
 
 class Matrix
 
+  # Method 1
   def self.rotate_ryan(matrix)
     # get dimensions
    rows = matrix.size
@@ -27,6 +28,7 @@ class Matrix
    end
   end
 
+  # Method 2
   def self.rotate_carlos(matrix)
 
     row_length = matrix.length
@@ -42,6 +44,7 @@ class Matrix
     new_matrix
   end
 
+  # Method 3
   def self.rotate(matrix)
     matrix.transpose.reverse
   end

@@ -50,11 +50,3 @@ class Matrix
   end
 
 end
-
-rectangle = [
-      [0, 1, 0],
-      [1, 1, 1]
-    ]
-
-rectangle.each {|r| puts r.inspect }
-solution = Matrix.rotate(rectangle)

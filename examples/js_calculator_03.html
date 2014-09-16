@@ -1,0 +1,111 @@
+<html>
+<head>
+<title> Calculator 3 </title>
+<script type="text/javascript">
+<!--
+function get_checked_selector(){
+  var elements = document.getElementsByName('selector');
+  for (i = 0; i < elements.length; i++) {
+      if (elements[i].checked == true){
+        return elements[i];
+      }
+  }
+  return null;
+};
+
+var invalid_operands = function(operation, _1st_element, _2nd_element){
+  if (_1st_element.innerHTML == '' || _2nd_element.innerHTML == ''){
+    alert("You must have two operands buddy! Try again.");
+    return true;
+  }
+
+  if (operation == '/' && _2nd_element.innerHTML == '0'){
+    alert("Whoa! Whoa! Whoa! Can't do division by 0. Try again.");
+    return true; 
+  }
+
+  return false;
+};
+
+function add_number(number_element){
+  var selector = get_checked_selector();
+  if (selector == null){
+    return;
+  }
+  var selected_element = document.getElementById(selector.value);
+  selected_element.innerHTML += number_element.value; 
+}
+
+function reset_values(operand_id){
+  document.getElementById(operand_id).innerHTML='';
+}
+
+function do_calculation(operation){
+  var first_element = document.getElementById('first_operand_span');
+  var second_element = document.getElementById('second_operand_span');
+
+  if ( invalid_operands(operation, first_element, second_element ) ){
+    return;
+  }
+
+  var _1st_operand_number = new Number(first_element.innerHTML);
+  var _2nd_operand_number = new Number(second_element.innerHTML);
+
+  var result_div =  document.getElementById("result_span");
+
+  switch(operation){
+    case '+':
+      result_div.innerHTML = _1st_operand_number + _2nd_operand_number;
+      break;
+    case '-':
+      result_div.innerHTML = _1st_operand_number - _2nd_operand_number;
+      break;
+    case '*':
+      result_div.innerHTML = _1st_operand_number * _2nd_operand_number;
+      break;
+    case '/':
+      result_div.innerHTML = _1st_operand_number / _2nd_operand_number;
+      break;
+  }
+
+}
+
+//-->
+</script>
+</head>
+<body>
+<h1 id="heading">This is my calculator</h1>
+
+<input type="radio" value='first_operand_span' name="selector" onclick="" />Operand: 
+<span id="first_operand_span"></span>
+<input type='button' onclick='reset_values("first_operand_span");' value='reset'/><br/>
+
+
+<input type="radio" value='second_operand_span' name="selector" onclick="" />Operand: <span id="second_operand_span"></span><input type='button' onclick='reset_values("second_operand_span");' value='reset'/><br/>
+
+<input type="button" value="1" name='number' onclick="add_number(this);" />
+<input type="button" value="2" name='number' onclick="add_number(this);" />
+<input type="button" value="3" name='number' onclick="add_number(this);" /><br/>
+
+<input type="button" value="4" name='number' onclick="add_number(this);" />
+<input type="button" value="5" name='number' onclick="add_number(this);" />
+<input type="button" value="6" name='number' onclick="add_number(this);" /><br/>
+
+<input type="button" value="7" name='number' onclick="add_number(this);" />
+<input type="button" value="8" name='number' onclick="add_number(this);" />
+<input type="button" value="9" name='number' onclick="add_number(this);" /><br/>
+
+<input type="button" value="0" name='number' onclick="add_number(this);" />
+<br/>
+
+<br/>
+<input type="button" value="+" name='operation' onclick="do_calculation(this.value);" />
+<input type="button" value="-" name='operation' onclick="do_calculation(this.value);" />
+<input type="button" value="*" name='operation' onclick="do_calculation(this.value);" />
+<input type="button" value="/" name='operation' onclick="do_calculation(this.value);" />
+
+<br/>
+Result: <span id="result_span"></span>
+
+</body>
+</html>

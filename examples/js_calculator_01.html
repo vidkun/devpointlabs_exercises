@@ -1,0 +1,86 @@
+<html>
+<head>
+<title> Calculator 1 </title>
+<script type="text/javascript">
+<!--
+function do_operation()
+{
+  var operations_buttons = document.getElementsByName("operation");
+  var operation;
+
+  for(index in operations_buttons){
+    if (operations_buttons[index].checked){
+      operation = operations_buttons[index].value;
+      break;
+    };
+  };
+  if (operation == null){
+    alert('You need to pick an operation');
+    return false;
+  };
+
+  var first_operand_element  = document.getElementById('first_operand');
+  var second_operand_element = document.getElementById('second_operand');
+
+  if (first_operand_element.value == "" || second_operand_element.value == ""){
+    alert("You need two operands to proceed");
+    return false;
+  };
+
+  var _1st_operand_number = new Number(first_operand_element.value);
+  var _2nd_operand_number = new Number(second_operand_element.value);
+
+  var result_div =  document.getElementById("result_span");
+
+  switch(operation){
+    case '+':
+      result_div.innerHTML = _1st_operand_number + _2nd_operand_number;
+      break;
+    case '-':
+      result_div.innerHTML = _1st_operand_number - _2nd_operand_number;
+      break;
+    case '*':
+      result_div.innerHTML = _1st_operand_number * _2nd_operand_number;
+      break;
+    case '/':
+      result_div.innerHTML = _1st_operand_number / _2nd_operand_number;
+      break;
+  }
+}
+//-->
+</script>
+</head>
+<body>
+<h1 id="heading">This is my calculator</h1>
+<p>Choose your operation:</p>
+
+<input type="radio" value="+" name='operation' />+
+<input type="radio" value="-" name='operation' />-
+<input type="radio" value="*" name='operation' />*
+<input type="radio" value="/" name='operation' />/
+
+<form id="form2" name="SecondForm">
+  Your First Number  <input type="text" value="" name='operand' id="first_operand" />
+  Your Second Number <input type="text" value="" name='operand' id="second_operand" />
+</form>
+
+Result: <span id="result_span"></span>
+
+<button name='calculate_button' id='calculate_button' onclick='do_operation();'>Do the operation</button>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

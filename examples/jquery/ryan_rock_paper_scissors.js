@@ -6,7 +6,7 @@ var choices = ["rock", "paper", "scissors", "lizard", "spock"];
 
 function play() {
   var user_choice = $( "#user_choice:checked" ).val();
-  var randomNumber = Math.floor((Math.random()*5)+1);
+  var randomNumber = Math.floor((Math.random()*5));
   var computer_choice = choices[randomNumber];
   game_counter++;
   var result = "";
@@ -158,6 +158,9 @@ function play() {
 
   $( "#result" ).html( result );
   $( "#reason" ).html( reason );
-
-
+  $( "#games_won" ).html( win_counter );
+  $( "#games_lost" ).html( loss_counter );
+  $( "#games_tied" ).html( tie_counter );
+  $( "#games_total" ).html( game_counter );
+  
 };

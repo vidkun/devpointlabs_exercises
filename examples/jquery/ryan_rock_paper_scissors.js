@@ -11,8 +11,7 @@ function play() {
   game_counter++;
   var result = "";
   var reason = "";
-  $( "#result" ).html( result );
-  $( "#reason" ).html( reason );
+  
 
   if (user_choice == "rock") {
     switch(computer_choice) {
@@ -126,8 +125,39 @@ function play() {
           win_counter++;
           break;
       }
+  } else if (user_choice == "spock") {
+      switch(computer_choice) {
+        case "rock":
+          reason = "Spock vaporizes Rock";
+          result = "You won this round!";
+          win_counter++;
+          break;
+        case "paper":
+          reason = "Paper disproves Spock";
+          result = "Computer wins this round.";
+          loss_counter++;
+          break;
+        case "scissors":
+          reason = "Spock smashes Scissors";
+          result = "You won this round!";
+          win_counter += 1
+        case "lizard":
+          reason = "Lizard poisons Spock";
+          result = "Computer wins this round.";
+          loss_counter++;
+          break;
+        case "spock":
+          result = "It's a tie!";
+          reason = "You both chose Spock";
+          tie_counter++;
+          break;
+      }
+  } else {
+      alert("I don't know what happened!");
   }
 
+  $( "#result" ).html( result );
+  $( "#reason" ).html( reason );
 
 
 };

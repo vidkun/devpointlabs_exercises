@@ -15,7 +15,7 @@ function play() {
   $( "#reason" ).html( reason );
 
   if (user_choice == "rock") {
-    switch computer_choice {
+    switch(computer_choice) {
       case "rock":
         result = "It's a tie!";
         reason = "You both chose Rock";
@@ -43,34 +43,62 @@ function play() {
         break;
       }
   } else if (user_choice == "paper") {
-      switch computer_choice {
+      switch(computer_choice) {
         case "rock":
-          reason = 'Paper covers Rock'
-          result = 'You won this round!'
+          reason = "Paper covers Rock";
+          result = "You won this round!";
           win_counter++;
           break;
         case "paper":
-          result = "It's a tie!"
-          reason = 'You both chose Paper'
+          result = "It's a tie!";
+          reason = "You both chose Paper";
           tie_counter++;
           break;
         case "scissors":
-          reason = 'Scissors cut Paper'
-          result = 'Computer wins this round.'
+          reason = "Scissors cut Paper";
+          result = "Computer wins this round.";
           loss_counter++;
           break;
         case "lizard":
-          reason = 'Lizard eats Paper'
-          result = 'Computer wins this round.'
+          reason = "Lizard eats Paper";
+          result = "Computer wins this round.";
           loss_counter++;
           break;
         case "spock":
-          reason = 'Paper disproves Spock'
-          result = 'You won this round!'
+          reason = "Paper disproves Spock";
+          result = "You won this round!";
           win_counter++;
           break;
       }
-    }
+  } else if (user_choice == "scissors") {
+      switch(computer_choice) {
+        case "rock":
+          reason = "Rock crushes Scissors";
+          result = "Computer wins this round.";
+          loss_counter++;
+          break;
+        case "paper":
+          reason = "Scissors cut Paper";
+          result = "You won this round!";
+          win_counter++;
+          break;
+        case "scissors":
+          result = "It's a tie!";
+          reason = "You both chose scissors";
+          tie_counter++;
+          break;
+        case "lizard":
+          reason = "Scissors decapitate Lizard";
+          result = "You won this round!";
+          win_counter++;
+          break;
+        case "spock":
+          reason = "Spock smashes Scissors";
+          result = "Computer wins this round.";
+          loss_counter++;
+          break;
+      }
+  } 
 
 
 

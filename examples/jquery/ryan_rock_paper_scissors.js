@@ -11,7 +11,8 @@ function play() {
   game_counter++;
   var result = "";
   var reason = "";
-  $( "#computer_choice" ).html( computer_choice );
+  $( "#result" ).html( result );
+  $( "#reason" ).html( reason );
 
   if (user_choice == "rock") {
     switch computer_choice {
@@ -44,38 +45,28 @@ function play() {
   } else if (user_choice == "paper") {
       switch computer_choice {
         case "rock":
-          puts ''
-          puts 'Paper covers Rock'
-          puts 'You won this round!'
-          puts ''
+          reason = 'Paper covers Rock'
+          result = 'You won this round!'
           win_counter++;
           break;
         case "paper":
-          puts ''
-          puts "It's a tie!"
-          puts 'You both chose Paper'
-          puts ''
+          result = "It's a tie!"
+          reason = 'You both chose Paper'
           tie_counter++;
           break;
         case "scissors":
-          puts ''
-          puts 'Scissors cut Paper'
-          puts 'Computer wins this round.'
-          puts ''
+          reason = 'Scissors cut Paper'
+          result = 'Computer wins this round.'
           loss_counter++;
           break;
         case "lizard":
-          puts ''
-          puts 'Lizard eats Paper'
-          puts 'Computer wins this round.'
-          puts ''
+          reason = 'Lizard eats Paper'
+          result = 'Computer wins this round.'
           loss_counter++;
           break;
         case "spock":
-          puts ''
-          puts 'Paper disproves Spock'
-          puts 'You won this round!'
-          puts ''
+          reason = 'Paper disproves Spock'
+          result = 'You won this round!'
           win_counter++;
           break;
       }

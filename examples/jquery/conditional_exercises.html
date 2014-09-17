@@ -1,0 +1,39 @@
+<html>
+<head>
+  <script type="text/javascript">
+$(document).ready(function(){
+  var stuffToDo = {
+   
+      "bar": function() {
+          alert( "the value was bar -- yay!" );
+      },
+   
+      "baz": function() {
+          alert( "boo baz :(" );
+      },
+   
+      "default": function() {
+          alert( "everything else is just ok" );
+      }
+   
+  };
+
+  var foo = 'bat';
+   
+  // Check if the property exists in the object.
+  if ( stuffToDo[ foo ] ) {
+      // This code won't run.
+      stuffToDo[ foo ]();
+   
+  } else {
+      // This code will run.
+      stuffToDo[ "default" ]();
+   
+  }
+});
+  </script>
+</head>
+<body>
+<h1>Hi</h1>
+</body>
+</html>

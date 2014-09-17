@@ -98,7 +98,35 @@ function play() {
           loss_counter++;
           break;
       }
-  } 
+  } else if (user_choice == "lizard") {
+      switch(computer_choice) {
+        case "rock":
+          reason = "Rock crushes Lizard";
+          result = "Computer wins this round.";
+          loss_counter++;
+          break;
+        case "paper":
+          reason = "Lizard eats Paper";
+          result = "You won this round!";
+          win_counter++;
+          break;
+        case "scissors":
+          reason = "Scissors decapitate Lizard";
+          result = "Computer wins this round.";
+          loss_counter++;
+          break;
+        case "lizard":
+          result = "It's a tie!";
+          reason = "You both chose Lizard";
+          tie_counter++;
+          break;
+        case "spock":
+          reason = "Lizard poisons Spock";
+          result = "You won this round!";
+          win_counter++;
+          break;
+      }
+  }
 
 
 

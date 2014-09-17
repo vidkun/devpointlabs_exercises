@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="ryan_rock_paper_scissors.js"></script>
+  </head>
+  <body>
+    <h1>Ryan's JavaScript Rock, Paper, Scissors</h1>
+
+    <div class="container">
+      <p>Please select an option and click 'play': </p>
+      <form name="user_selection_form">
+      <input type="radio" id="user_choice" name="user_choice" value="rock">Rock
+      <input type="radio" id="user_choice" name="user_choice" value="paper">Paper
+      <input type="radio" id="user_choice" name="user_choice" value="scissors">Scissors
+      <input type="radio" id="user_choice" name="user_choice" value="lizard">Lizard
+      <input type="radio" id="user_choice" name="user_choice" value="spock">Spock
+
+      <br>
+        <button onclick="play(); return false;">Play!</button>
+      </form>
+
+      You <span name="result" id="result"> </span><br>
+      The computer chose: <span name="computer_choice" id="computer_choice"> </span>
+
+    </div>
+  </body>
+</html>
